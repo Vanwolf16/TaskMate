@@ -12,6 +12,7 @@ function AddTask({tasklist,setTasklist,task,setTask}) {
         : todo
       ));
       setTasklist(updatedTasklist);
+      setTask({});
     }else{
       const date = new Date();
 
@@ -22,7 +23,8 @@ function AddTask({tasklist,setTasklist,task,setTask}) {
       }
   
       setTasklist([...tasklist,newTask]);
-      e.target.task.value = "";
+      
+      setTask({});
     }
 
    
@@ -31,8 +33,8 @@ function AddTask({tasklist,setTasklist,task,setTask}) {
   return (
     <section className='addTask'>
       <form onSubmit={handleSubmit}>
-        <input type="text" name='task' value={task.name} autoComplete='off' placeholder='add task' maxLength={25} onChange={e => setTask({...task, name: e.target.value})}/>
-        <button type='submit'>Add</button>
+        <input type="text" name='task' value={task.name || ""} autoComplete='off' placeholder='add task' maxLength={25} onChange={e => setTask({...task, name: e.target.value})}/>
+        <button type='submit'>{task.id ? "Update" : "Add"}</button>
       </form>
     </section>
   )
